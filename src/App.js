@@ -1,9 +1,13 @@
-import './App.css';
-import Router from './router';
+import "./App.css";
+import Router from "./router";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './themes/theme';
 
 function App() {
   return (
-    <Router/>
+    <ThemeProvider theme={theme}>
+      <Router />
+    </ThemeProvider>
   );
 }
 

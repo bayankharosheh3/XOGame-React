@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  StyledContainer,
   ButtonList,
   StyledButton,
   StyledHeading,
@@ -8,6 +7,7 @@ import {
 import Card from "./Card";
 import PersonIcon from '@mui/icons-material/Person';
 import ComputerIcon from '@mui/icons-material/Computer';
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -17,7 +17,7 @@ const Menu = () => {
   };
 
   return (
-    <StyledContainer>
+    <>
       <ButtonList>
         <StyledHeading>Who do you want to play with?</StyledHeading>
         <StyledButton
@@ -37,8 +37,9 @@ const Menu = () => {
           Vs Computer
         </StyledButton>
       </ButtonList>
+      <Link to="/game">Start Menu</Link>
       {selectedButton && <Card selectedButton={selectedButton} />}
-    </StyledContainer>
+    </>
   );
 };
 

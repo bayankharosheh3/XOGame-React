@@ -1,17 +1,5 @@
 import styled from "@emotion/styled";
-import theme from "../../themes/theme";
 import { Button } from "@mui/material";
-
-export const StyledContainer = styled("div")({
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "80vh",
-  width: "80%",
-  borderRadius: "4px",
-  backgroundColor: theme.palette.background.paper,
-});
 
 export const ButtonList = styled("div")({
   display: "flex",

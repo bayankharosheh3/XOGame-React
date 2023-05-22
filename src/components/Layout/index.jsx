@@ -1,11 +1,12 @@
-import React from 'react';
-import { StyledLayout, StyledTitle } from './styles';
+import React from "react";
+import { StyledLayout, StyledTitle } from "./styles";
+import { StyledContainer } from "./styles";
 
-const Layout = ({children }) => {
+const Layout = ({ children }) => {
   return (
     <StyledLayout>
       <StyledTitle variant="h1">XO Game</StyledTitle>
-      {children}
+      <StyledContainer>{children}</StyledContainer>
     </StyledLayout>
   );
 };

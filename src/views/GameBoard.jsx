@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 const GameBoard = () => {
   return (
-    <><Link to="/">start</Link>
+    <>
+      <Link to="/">start</Link>
       <Board />
     </>
   );

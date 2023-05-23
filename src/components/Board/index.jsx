@@ -1,36 +1,53 @@
+import { Button, Grid } from "@mui/material";
 import React, { useState } from "react";
-import { Button, Grid, Paper } from "@mui/material";
-import { styled } from "@mui/system";
+import { StyledButton, StyledPaper } from "./styles";
+import { useRecoilState } from "recoil";
+import { settingsAtom } from "../../recoil/atom/gameAtom";
+import { Computer } from "@mui/icons-material";
+import { getComputerMove } from "../getComputer";
 
-const StyledPaper = styled(Paper)({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "16px",
-  width: "70%",
-  height: "70%",
-  border: "2px solid #000",
-});
-
-const StyledButton = styled(Button)(({ index }) => ({
-  width: "200px",
-  height: "150px",
-  fontSize: "6rem",
-  borderRight: index % 3 === 2 ? "0px" : "3px solid #000",
-  borderBottom: Math.floor(index / 3) === 2 ? "0px" : "3px solid #000",
-}));
+const calculateWinner = (board) => {
+    const winCombinations = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+      [0, 4, 8], [2, 4, 6] // Diagonals
+    ];
+  
+    for (let i = 0; i < winCombinations.length; i++) {
+      const [a, b, c] = winCombinations[i];
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        return board[a]; // Return the winning player (X or O)
+      }
+    }
+  
+    return null; // No winner
+};
 
 const Board = () => {
+  const [settings, setSettings] = useRecoilState(settingsAtom);
+
+  console.log(settings.player2)
+
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState("X");
 
+  const winner = calculateWinner(board);
+
+  console.log(winner)
   const handleCellClick = (index) => {
     if (board[index] === null) {
       const newBoard = [...board];
       newBoard[index] = currentPlayer;
       setBoard(newBoard);
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+
+      if(settings.player2 === 'computer'){
+        console.log('test')
+        const computerMove = getComputerMove(newBoard);
+        newBoard[computerMove] = "O";
+        setBoard(newBoard);
+        setCurrentPlayer("X");
+      }
     }
   };
 

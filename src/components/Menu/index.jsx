@@ -8,14 +8,21 @@ import Card from "./Card";
 import PersonIcon from '@mui/icons-material/Person';
 import ComputerIcon from '@mui/icons-material/Computer';
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { gameAtom } from "../../recoil/atom/gameAtom";
 
 const Menu = () => {
   const [selectedButton, setSelectedButton] = useState(null);
 
+  const [gameVs, setGameVs] = useRecoilState(gameAtom);
+
+
   const handleButtonClick = (buttonId) => {
     setSelectedButton(buttonId);
+    setGameVs(buttonId == 1?"player":"computer")
   };
 
+  
   return (
     <>
       <ButtonList>

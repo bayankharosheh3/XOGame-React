@@ -23,3 +23,11 @@ export const timesWinAtom = atom({
     draw: 0,
   },
 });
+
+export const time = atom({
+  key: "timeState",
+  default: {
+    min: 0,
+    max: 0,
+  },
+});

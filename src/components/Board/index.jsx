@@ -1,44 +1,48 @@
 import { Button, Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyledButton, StyledPaper } from "./styles";
 import { useRecoilState } from "recoil";
 import { settingsAtom } from "../../recoil/atom/gameAtom";
 import { getComputerMove } from "../getComputer";
-
-const calculateWinner = (board) => {
-  const winCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (let i = 0; i < winCombinations.length; i++) {
-    const [a, b, c] = winCombinations[i];
-    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      return board[a]; // Return the winning player (X or O)
-    }
-  }
-
-  return null; // No winner
-};
 
 const Board = () => {
   const [settings, setSettings] = useRecoilState(settingsAtom);
 
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [timer, setTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+
   const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-  const winner = calculateWinner(board);
+  if (!isTimerRunning && board.every((cell) => cell === null)) {
+    setIsTimerRunning(true); // Start the timer when the first move is made
+  }
+
+  useEffect(() => {
+    let intervalId;
+
+    if (isTimerRunning) {
+      intervalId = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isTimerRunning]);
 
   console.log(settings);
 
-  console.log(winner);
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
+
   const handleCellClick = (index) => {
     if (board[index] === null) {
       const newBoard = [...board];
@@ -53,21 +57,25 @@ const Board = () => {
         setBoard(newBoard);
         setCurrentPlayer("X");
       }
+
+      
     }
   };
 
   const handleResetClick = () => {
     setBoard(Array(9).fill(null));
     setCurrentPlayer("X");
+    setTimer(0); // Reset the timer when the game is reset
+    setIsTimerRunning(false); // Stop the timer when the game is reset
   };
 
   return (
-    <Grid justifyContent="center" alignItems="center">
+    <Grid>
       <StyledPaper>
-        <Grid container spacing={0} justifyContent="center" alignItems="center">
+        <Grid container justifyContent="center" alignItems="center">
           {numbers.map((number) => {
             return (
-              <Grid item xs={4}>
+              <Grid item xs={3.5} key={number}>
                 <StyledButton
                   index={number}
                   onClick={() => handleCellClick(number)}
@@ -78,10 +86,17 @@ const Board = () => {
             );
           })}
         </Grid>
+      </StyledPaper>
+      <Grid container item justifyContent="space-between" alignItems="center">
         <Button variant="contained" onClick={handleResetClick}>
           Reset
         </Button>
-      </StyledPaper>
+      </Grid>
+
+      {/* Display the timer */}
+      <Grid container item justifyContent="center" alignItems="center">
+        <p>Timer: {formatTime(timer)}</p>
+      </Grid>
     </Grid>
   );
 };

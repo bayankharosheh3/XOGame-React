@@ -19,14 +19,13 @@ const VsComputerContainer = () => {
   const [hard, setHard] = useState(false);
   const [startFor, setStartFor] = useState(true);
 
-
   const handleButton2Click = () => {
     setSettings({
       ...settings,
-      player1: player,
+      player1: player === "" ? settings.player1 : player,
       player2: "computer",
       hard: hard,
-      startFor:startFor,
+      startFor: startFor,
     });
     navigate("/game");
   };
@@ -40,7 +39,7 @@ const VsComputerContainer = () => {
         focused
         variant="outlined"
         value={player}
-        onClick={(e) => setPlayer(e.target.value)}
+        onChange={(e) => setPlayer(e.target.value)}
       />
       <Grid container spacing={2}>
         <Grid item xs={12}>

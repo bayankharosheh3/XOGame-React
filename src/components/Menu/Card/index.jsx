@@ -1,6 +1,6 @@
 import React from "react";
-import VsPlayerContainer from "./VsPlayerContainer/VsPlayerContainer";
-import VsComputerContainer from "./VsComputerContainer/VsComputerContainer";
+import VsPlayerContainer from "./VsPlayerContainer";
+import VsComputerContainer from "./VsComputerContainer";
 import { Content } from "./styles";
 
 const Card = ({ selectedButton }) => {

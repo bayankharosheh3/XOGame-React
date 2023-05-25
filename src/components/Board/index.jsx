@@ -3,37 +3,42 @@ import React, { useState } from "react";
 import { StyledButton, StyledPaper } from "./styles";
 import { useRecoilState } from "recoil";
 import { settingsAtom } from "../../recoil/atom/gameAtom";
-import { Computer } from "@mui/icons-material";
 import { getComputerMove } from "../getComputer";
 
 const calculateWinner = (board) => {
-    const winCombinations = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-      [0, 4, 8], [2, 4, 6] // Diagonals
-    ];
-  
-    for (let i = 0; i < winCombinations.length; i++) {
-      const [a, b, c] = winCombinations[i];
-      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        return board[a]; // Return the winning player (X or O)
-      }
+  const winCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < winCombinations.length; i++) {
+    const [a, b, c] = winCombinations[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a]; // Return the winning player (X or O)
     }
-  
-    return null; // No winner
+  }
+
+  return null; // No winner
 };
 
 const Board = () => {
   const [settings, setSettings] = useRecoilState(settingsAtom);
 
-  console.log(settings.player2)
-
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState("X");
+  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   const winner = calculateWinner(board);
 
-  console.log(winner)
+  console.log(settings);
+
+  console.log(winner);
   const handleCellClick = (index) => {
     if (board[index] === null) {
       const newBoard = [...board];
@@ -41,8 +46,8 @@ const Board = () => {
       setBoard(newBoard);
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
 
-      if(settings.player2 === 'computer'){
-        console.log('test')
+      if (settings.player2 === "computer") {
+        console.log("test");
         const computerMove = getComputerMove(newBoard);
         newBoard[computerMove] = "O";
         setBoard(newBoard);
@@ -56,30 +61,22 @@ const Board = () => {
     setCurrentPlayer("X");
   };
 
-  const renderCell = (index) => {
-    return (
-      <StyledButton
-        index={index}
-        onClick={() => handleCellClick(index)}
-      >
-        {board[index]}
-      </StyledButton>
-    );
-  };
-
   return (
-    <Grid container justifyContent="center" alignItems="center" height="100vh">
+    <Grid justifyContent="center" alignItems="center">
       <StyledPaper>
         <Grid container spacing={0} justifyContent="center" alignItems="center">
-          <Grid item>{renderCell(0)}</Grid>
-          <Grid item>{renderCell(1)}</Grid>
-          <Grid item>{renderCell(2)}</Grid>
-          <Grid item>{renderCell(3)}</Grid>
-          <Grid item>{renderCell(4)}</Grid>
-          <Grid item>{renderCell(5)}</Grid>
-          <Grid item>{renderCell(6)}</Grid>
-          <Grid item>{renderCell(7)}</Grid>
-          <Grid item>{renderCell(8)}</Grid>
+          {numbers.map((number) => {
+            return (
+              <Grid item xs={4}>
+                <StyledButton
+                  index={number}
+                  onClick={() => handleCellClick(number)}
+                >
+                  {board[number]}
+                </StyledButton>
+              </Grid>
+            );
+          })}
         </Grid>
         <Button variant="contained" onClick={handleResetClick}>
           Reset

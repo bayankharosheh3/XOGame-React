@@ -11,7 +11,7 @@ export const settingsAtom = atom({
     player1:"Player 1",
     player2:"Player 2",
     hard:false,
-    start:"player1"
+    startFor:true,
   },
 });
 

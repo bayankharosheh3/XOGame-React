@@ -29,17 +29,18 @@ export const PlayerName = styled(Typography)({
   textAlign:'center'
 });
 
-export const Xo = styled(Typography)({
+export const Xo = styled(Typography)(({ theme, current }) => ({
   fontSize: "16px",
   padding: "3px 5px",
-  backgroundColor: "#b23a48",
+  backgroundColor: current ==='true' ? theme.palette.info.main : "#b23a48",
   borderRadius: "10%",
   color: "#fff",
   fontFamily: "Satisfy, cursive",
-  fontWeight:'700',
-  width:'30px',  
-  textAlign:'center'
-});
+  fontWeight: "700",
+  width: "30px",
+  textAlign: "center",
+}));
+
 
 export const RoundNumCol = styled(Grid)({
   fontSize: "30px",

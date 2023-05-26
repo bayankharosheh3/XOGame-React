@@ -21,13 +21,20 @@ export const timesWinAtom = atom({
     player1: 0,
     player2: 0,
     draw: 0,
+    round:1,
   },
 });
 
-export const time = atom({
+export const timeAtom = atom({
   key: "timeState",
   default: {
     min: 0,
     max: 0,
   },
+});
+
+
+export const currentPlayerAtom = atom({
+  key: "currentPlayerState",
+  default: "X",
 });

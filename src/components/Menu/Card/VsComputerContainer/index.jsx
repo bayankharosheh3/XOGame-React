@@ -54,16 +54,7 @@ const VsComputerContainer = () => {
           />
         </Grid>
         <Grid item xs={4}>
-          <FormControlLabel
-            control={
-              <Switch
-                defaultChecked
-                onChange={(e) => setStartFor(e.target.checked)}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            }
-            label="Go First"
-          />
+         
         </Grid>
       </Grid>
       <ButtonContainer>

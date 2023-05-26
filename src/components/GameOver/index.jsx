@@ -25,8 +25,6 @@ export default function AlertDialog({ open, setOpen, setBoard,winner,setTimer })
     setTimer(0);
   };
 
-  console.log(winner)
-
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>

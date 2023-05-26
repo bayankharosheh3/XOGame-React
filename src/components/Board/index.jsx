@@ -2,18 +2,27 @@ import { Button, Grid } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { StyledButton, StyledPaper } from "./styles";
 import { useRecoilState } from "recoil";
-import { settingsAtom, timesWinAtom } from "../../recoil/atom/gameAtom";
+import {
+  currentPlayerAtom,
+  settingsAtom,
+  timeAtom,
+  timesWinAtom,
+} from "../../recoil/atom/gameAtom";
 import { getComputerMove } from "../getComputerMoveHard.js";
-import { getComputerMoveEasy } from "../getComuterMoveEasy";
+import { getComputerMoveEasy } from "../getComputerMoveEasy";
 import AlertDialog from "../GameOver";
 import { calculateWinner } from "../calculateWinner";
+import { formatTime } from "../formatTime";
+import { checkDraw } from "../checkDraw";
+import { displayWinner } from "../displayWinner";
 
 const Board = () => {
   const [settings, setSettings] = useRecoilState(settingsAtom);
   const [times, setTimes] = useRecoilState(timesWinAtom);
+  const [time, setTime] = useRecoilState(timeAtom);
 
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [currentPlayer, setCurrentPlayer] = useRecoilState(currentPlayerAtom);
   const [timer, setTimer] = useState(0);
   const [open, setOpen] = useState(false);
   const [winner, setWinner] = useState("");
@@ -22,6 +31,7 @@ const Board = () => {
 
   const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
+  
   if (!isTimerRunning && board.every((cell) => cell === null)) {
     setIsTimerRunning(true); // Start the timer when the first move is made
   }
@@ -40,35 +50,6 @@ const Board = () => {
     };
   }, [isTimerRunning]);
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
-
-  function displayWinner(newBoard) {
-    const winner = calculateWinner(newBoard);
-
-    if (winner !== null) {
-      setOpen(true);
-      winner === "X"
-        ? setWinner(settings.player1)
-        : setWinner(settings.player2);
-      winner === "X"
-        ? setTimes({
-          ...times,
-          player1: times.player1 + 1,
-        })
-        : setTimes({
-          ...times,
-          player2: times.player2 + 1,
-        });
-      setIsTimerRunning(false);
-    }
-  }
-
   function computerMove(newBoard) {
     if (settings.player2 === "computer") {
       if (settings.hard) {
@@ -81,7 +62,20 @@ const Board = () => {
         setBoard(newBoard);
       }
 
-      displayWinner(newBoard);
+      displayWinner(
+        newBoard,
+        calculateWinner,
+        setOpen,
+        setWinner,
+        settings,
+        setTimes,
+        times,
+        setIsTimerRunning,
+        time,
+        setTime,
+        timer,
+        checkDraw
+      );
       setCurrentPlayer("X");
     }
   }
@@ -93,16 +87,28 @@ const Board = () => {
       setBoard(newBoard);
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
 
-      displayWinner(newBoard);
+      displayWinner(
+        newBoard,
+        calculateWinner,
+        setOpen,
+        setWinner,
+        settings,
+        setTimes,
+        times,
+        setIsTimerRunning,
+        time,
+        setTime,
+        timer,
+        checkDraw
+      );
       computerMove(newBoard);
     }
   };
 
   const handleResetClick = () => {
     setBoard(Array(9).fill(null));
-    setCurrentPlayer("X");
-    setTimer(0);
     setIsTimerRunning(false);
+    setTimer(0);
   };
 
   return (
@@ -138,6 +144,7 @@ const Board = () => {
         winner={winner}
         setIsTimerRunning={setIsTimerRunning}
         setTimer={setTimer}
+        formatTime={formatTime}
       />
     </Grid>
   );

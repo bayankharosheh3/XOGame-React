@@ -13,11 +13,16 @@ export const StyledLayout = styled(Box)(({ theme }) => ({
 }));
 
 export const StyledTitle = styled(Typography)(({ theme }) => ({
-  fontSize: "85px",
-  marginBottom: "35px",
+  fontSize: "4rem",
+  marginBottom: "10px",
   fontWeight:"800",
   color: theme.palette.primary.main,
   fontFamily: 'Dancing Script',
+  "@media (max-width: 320px)": {
+   
+    fontSize: "3rem",
+
+   },
 }));
 
 export const StyledContainer = styled("div")({

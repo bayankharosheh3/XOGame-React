@@ -1,6 +1,6 @@
 import { Button, Grid } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { StyledButton, StyledPaper } from "./styles";
+import { ResetButton, RestButton, StyledButton, StyledGrid, StyledPaper } from "./styles";
 import { useRecoilState } from "recoil";
 import {
   currentPlayerAtom,
@@ -112,7 +112,7 @@ const Board = () => {
   };
 
   return (
-    <Grid container justifyContent="center" alignItems="center">
+    <StyledGrid container justifyContent="center" alignItems="center">
       <StyledPaper>
         <Grid container justifyContent="center" alignItems="center">
           {numbers.map((number) => {
@@ -130,9 +130,9 @@ const Board = () => {
         </Grid>
       </StyledPaper>
       <Grid container item justifyContent="space-between" alignItems="center">
-        <Button variant="contained" onClick={handleResetClick}>
+        <ResetButton variant="contained" onClick={handleResetClick}>
           Reset
-        </Button>
+        </ResetButton>
       </Grid>
       <Grid container item justifyContent="center" alignItems="center">
         <p>Timer: {formatTime(timer)}</p>
@@ -146,7 +146,7 @@ const Board = () => {
         setTimer={setTimer}
         formatTime={formatTime}
       />
-    </Grid>
+    </StyledGrid>
   );
 };
 

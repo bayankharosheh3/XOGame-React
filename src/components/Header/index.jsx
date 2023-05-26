@@ -25,7 +25,7 @@ const Header = () => {
   console.log(currentPlayer);
   return (
     <Container container>
-      <PlayerInfo item xs={2} alignItems="center" justifyContent="center">
+      <PlayerInfo item alignItems="center" justifyContent="center">
         <PlayerName variant="h2">{settings.player1}</PlayerName>
         <Xo variant="body1" current={currentPlayer === "X" ? "true" : "false"}>
           X
@@ -37,12 +37,12 @@ const Header = () => {
       <RoundNumCol item xs={4}>
         Round#: <span>{times.round}</span>
         {settings.player2 === "computer" && (
-          <div>
+          <div style={{fontSize:'13px',marginTop:'10px'}}>
             {formatTime(time.min)}---{formatTime(time.max)}
           </div>
         )}
       </RoundNumCol>
-      <PlayerInfo item xs={2}>
+      <PlayerInfo item>
         <PlayerName variant="h2">{settings.player2}</PlayerName>
         <Xo variant="body1" current={currentPlayer === "O" ? "true" : "false"}>
           O

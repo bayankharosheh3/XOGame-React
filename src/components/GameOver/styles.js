@@ -13,6 +13,12 @@ export const StyledDialogTitle = styled(DialogTitle)({
   fontFamily: "Dancing Script",
   fontSize: "40px",
   backgroundColor: "black",
+  "@media (max-width: 576px)": {
+    fontSize: "25px",
+  },
+  "@media (max-width: 320px)": {
+    fontSize: "20px",
+  },
 });
 
 export const StyledDialogContent = styled(DialogContent)({
@@ -24,6 +30,12 @@ export const StyledDialogContentText = styled(DialogContentText)({
   fontWeight: "800",
   color: theme.palette.primary.main,
   fontFamily: "Dancing Script",
+  "@media (max-width: 576px)": {
+    fontSize: "22px",
+  },
+  "@media (max-width: 320px)": {
+    fontSize: "18px",
+  },
 });
 
 export const StyledDialogActions = styled(DialogActions)(({ theme }) => ({
@@ -34,4 +46,7 @@ export const StyledButton = styled(Button)({
   margin: "10px",
   color: "white",
   borderColor: "white",
+  "@media (max-width: 576px)": {
+    fontSize: "10px",
+  },
 });

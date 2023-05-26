@@ -40,7 +40,7 @@ const Menu = () => {
           Vs Computer
         </StyledButton>
       </ButtonList>
-      {selectedButton && <Card selectedButton={selectedButton} />}
+      {selectedButton && <Card selectedButton={selectedButton} setSelectedButton={setSelectedButton}/>}
     </Container>
   );
 };

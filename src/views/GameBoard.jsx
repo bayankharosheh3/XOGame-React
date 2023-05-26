@@ -21,14 +21,27 @@ const GameBoard = () => {
           variant="text"
           startIcon={<ArrowCircleLeftOutlinedIcon />}
           onClick={() => navigate("/")}
+          size={'small'}
         >
           back to Start Menu
         </Button>
       </Grid>
-      <Grid item width={"60%"}>
+      <Grid
+        container
+        item
+        width={"100%"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <Header />
       </Grid>
-      <Grid item width={"60%"}>
+      <Grid
+        item
+        container
+        width={"100%"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <Board />
       </Grid>
     </Grid>

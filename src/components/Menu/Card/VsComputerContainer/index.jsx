@@ -9,9 +9,9 @@ import {
 import { useRecoilState } from "recoil";
 import { settingsAtom } from "../../../../recoil/atom/gameAtom";
 import { useNavigate } from "react-router-dom";
-import { Grid, FormControlLabel, Switch } from "@mui/material";
+import { Grid, FormControlLabel, Switch, Button } from "@mui/material";
 
-const VsComputerContainer = () => {
+const VsComputerContainer = ({setSelectedButton}) => {
   const [settings, setSettings] = useRecoilState(settingsAtom);
   const navigate = useNavigate();
 
@@ -29,6 +29,11 @@ const VsComputerContainer = () => {
     });
     navigate("/game");
   };
+
+  const handleButton3Click = () => {
+   setSelectedButton(null)
+  };
+
 
   return (
     <ContentContainer>
@@ -53,11 +58,16 @@ const VsComputerContainer = () => {
             label="Hard"
           />
         </Grid>
-        <Grid item xs={4}>
-         
-        </Grid>
+        <Grid item xs={4}></Grid>
       </Grid>
       <ButtonContainer>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={handleButton3Click}
+        >
+          cancel
+        </Button>
         <StyledButton
           variant="contained"
           color="success"

@@ -3,10 +3,10 @@ import VsPlayerContainer from "./VsPlayerContainer";
 import VsComputerContainer from "./VsComputerContainer";
 import { Content } from "./styles";
 
-const Card = ({ selectedButton }) => {
+const Card = ({ selectedButton,setSelectedButton }) => {
   return (
     <Content>
-      {selectedButton === 1 ? <VsPlayerContainer /> : <VsComputerContainer />}
+      {selectedButton === 1 ? <VsPlayerContainer setSelectedButton={setSelectedButton}/> : <VsComputerContainer setSelectedButton={setSelectedButton}/>}
     </Content>
   );
 };

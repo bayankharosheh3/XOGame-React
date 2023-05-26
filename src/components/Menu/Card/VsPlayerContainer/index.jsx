@@ -10,8 +10,9 @@ import {
 import { useRecoilState } from "recoil";
 import { settingsAtom } from "../../../../recoil/atom/gameAtom";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
-const VsPlayerContainer = () => {
+const VsPlayerContainer = ({setSelectedButton}) => {
   const [settings, setSettings] = useRecoilState(settingsAtom);
   const navigate = useNavigate();
 
@@ -27,6 +28,10 @@ const VsPlayerContainer = () => {
     navigate("/game");
   };
 
+  const handleButton3Click = () => {
+    setSelectedButton(null)
+   };
+
   return (
     <ContentContainer>
       <StyledHeading>Vs Player</StyledHeading>
@@ -37,6 +42,7 @@ const VsPlayerContainer = () => {
         value={player1}
         onChange={(e) => setPlayer1(e.target.value)}
         focused
+        size='small'
       />
       <StyledTextField
         id="player2"
@@ -45,9 +51,17 @@ const VsPlayerContainer = () => {
         value={player2}
         onChange={(e) => setPlayer2(e.target.value)}
         focused
+        size='small'
       />
       <StyledAlert severity="info">Player1 will go first</StyledAlert>
       <ButtonContainer>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={handleButton3Click}
+        >
+          cancel
+        </Button>
         <StyledButton
           variant="contained"
           color="success"

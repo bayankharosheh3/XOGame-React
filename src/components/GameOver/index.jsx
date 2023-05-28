@@ -16,7 +16,7 @@ export default function AlertDialog({ open, setOpen, setBoard,winner,setTimer })
   const handleBack = () => {
     setOpen(false);
     setBoard(Array(9).fill(null));
-    navigate('/')
+    navigate('/XOGame-React')
   };
 
   const handleClose = () => {

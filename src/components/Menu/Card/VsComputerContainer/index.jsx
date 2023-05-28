@@ -27,7 +27,7 @@ const VsComputerContainer = ({setSelectedButton}) => {
       hard: hard,
       startFor: startFor,
     });
-    navigate("/game");
+    navigate("/XOGame-React/game");
   };
 
   const handleButton3Click = () => {

@@ -25,7 +25,7 @@ const VsPlayerContainer = ({setSelectedButton}) => {
       player1: player1 === "" ? settings.player1 : player1,
       player2: player2 === "" ? settings.player2 : player2,
     });
-    navigate("/game");
+    navigate("/XOGame-React/game");
   };
 
   const handleButton3Click = () => {

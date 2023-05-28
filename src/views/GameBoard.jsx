@@ -20,7 +20,7 @@ const GameBoard = () => {
         <Button
           variant="text"
           startIcon={<ArrowCircleLeftOutlinedIcon />}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/XOGame-React")}
           size={'small'}
         >
           back to Start Menu

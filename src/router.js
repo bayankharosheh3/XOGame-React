@@ -9,8 +9,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Layout><StartMenu /></Layout>} />
-        <Route path="/game" element={<Layout><GameBoard /></Layout>} />
+        <Route path='/XOGame-React' element={<Layout><StartMenu /></Layout>} />
+        <Route path="/XOGame-React/game" element={<Layout><GameBoard /></Layout>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/XOGame-React/static/css/main.e6c13ad2.css",
-    "main.js": "/XOGame-React/static/js/main.38f92152.js",
+    "main.js": "/XOGame-React/static/js/main.ebeb72ea.js",
     "static/js/787.9fd27ad8.chunk.js": "/XOGame-React/static/js/787.9fd27ad8.chunk.js",
     "index.html": "/XOGame-React/index.html",
     "main.e6c13ad2.css.map": "/XOGame-React/static/css/main.e6c13ad2.css.map",
-    "main.38f92152.js.map": "/XOGame-React/static/js/main.38f92152.js.map",
+    "main.ebeb72ea.js.map": "/XOGame-React/static/js/main.ebeb72ea.js.map",
     "787.9fd27ad8.chunk.js.map": "/XOGame-React/static/js/787.9fd27ad8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.38f92152.js"
+    "static/js/main.ebeb72ea.js"
   ]
 }
